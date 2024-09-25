@@ -1,0 +1,21 @@
+﻿
+@model List<Student>
+
+
+<table class="table table-bordered table-hover w-75" style="margin: 0px auto">
+
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.name</td>
+            <td>@item.age</td>
+            <td>
+                <img src="@item.image" alt="Alternate Text" width="100px" /> 
+                <a class="btn-success text-decoration-none p-1" style="margin: auto 15px; border-radius:5px" href="/Student/Details?id=@item.id">Details</a>
+            </td>
+
+        </tr>
+    }
+
+</table>
