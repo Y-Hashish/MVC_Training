@@ -6,13 +6,13 @@
 
     <h1 class="text-center m-4">edit</h1>
 
-    <form   method="post" action="/employee/saveEdit/@Model.id">
+    <form method="post" asp-action="saveEdit" asp-controller="employee" asp-route-id="@Model.id">
         <label class="form-label">Name</label><br />
         <input class="form-control" type="text" name="name" value="@Model.name">
         <label class="form-label">Salary</label><br />
         <input class="form-control" type="text" name="salary" value="@Model?.salary">
         <label class="form-label">Address</label><br />
-        <input class="form-control" type="text" name="adress" value="@Model.adress">
+        <input class="form-control" asp-for="adress">
 
 
         <label class="form-label">Department Id</label><br />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
 using MVC_Training.Models;
 
 namespace MVC_Training.Controllers
@@ -12,6 +13,7 @@ namespace MVC_Training.Controllers
             //ViewBag.Employees = employees;
             return View("Index", employees);
         }
+        
 
         public IActionResult details (int id)
         {
@@ -55,6 +57,19 @@ namespace MVC_Training.Controllers
                 return RedirectToAction("Index");
             }
             return View("edit",emp);
+        }
+
+        public IActionResult delete(int id)
+        {
+            var emp = context.employees.FirstOrDefault(e =>e.id == id);
+            if (emp != null)
+            {
+                context.employees.Remove(emp);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("index");
+            
         }
     }
 }

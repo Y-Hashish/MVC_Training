@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <h1 class="text-center m-5">Hashish Lite Employee's</h1>
+
 <table class="table table-hover table-bordered">
     <tr>
         <th>Name</th>
@@ -25,6 +26,7 @@
             <td>
                 <a class="btn btn-primary" href="/employee/details?id=@item.id">Details</a>
                 <a class="btn btn-success" href="/employee/edit?id=@item.id">Edit</a>
+                <a class="btn btn-danger" href="/employee/delete?id=@item.id">Delete</a>
             </td>
         </tr>
     }
