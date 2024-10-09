@@ -6,15 +6,31 @@
 
 
 <form class="w-75"style="margin:0px auto" method="post" asp-action="save" asp-controller="employee">
-    <label class="form-label">Name</label><br />
-    <input class="form-control" type="text" name="name" value="@Model?.name"> 
-    <label class="form-label">Salary</label><br />
-    <input class="form-control" type="text" name="salary" value="@Model?.salary">
-    <label class="form-label">Address</label><br />
-    <input class="form-control" type="text" name="adress" value="@Model?.adress">
-    <label class="form-label">Department Id</label><br />
-    <input class="form-control" type="text" name="deptId" value="@Model?.deptId">
-    <label class="form-label">Image URL</label><br />
-    <input class="form-control" type="file" name="ImageUrl" value="@Model?.ImageUrl">
+    @* <label class="form-label">Name</label><br /> *@
+    <label asp-for="name"></label>
+    <input class="form-control" asp-for="name">
+    <span asp-validation-for="name" class="text-danger"></span><br />
+
+    <label asp-for="salary"></label>
+    <input class="form-control" asp-for="salary">
+    <span asp-validation-for="salary" class="text-danger"></span><br />
+
+    <label asp-for="adress"></label> 
+    <input class="form-control" asp-for="adress">
+    <span asp-validation-for="adress" class="text-danger"></span><br />
+
+    <label asp-for="deptId"></label> 
+    <input class="form-control" asp-for="deptId">
+    <span asp-validation-for="deptId" class="text-danger"></span><br />
+
+    <label asp-for="ImageUrl"></label> 
+    <input class="form-control" asp-for="ImageUrl"><br />
+    @* <span asp-validation-for="ImageUrl" class="text-danger"></span> <br /> *@
+
     <input type="submit" name="name" value="Save" class="btn btn-success"/>
 </form>
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+@section Scripts {
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" ></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

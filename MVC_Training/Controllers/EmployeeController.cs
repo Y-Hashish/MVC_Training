@@ -6,6 +6,12 @@ namespace MVC_Training.Controllers
 {
     public class EmployeeController : Controller
     {
+        public IActionResult checkName(string name)
+        {
+            if(name.Contains("slave"))
+                return Json(true);
+            return Json(false);
+        }
             ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
@@ -27,7 +33,7 @@ namespace MVC_Training.Controllers
         
         public IActionResult save(Employee emp)
         {
-            if (emp.name != null)
+            if (ModelState.IsValid == true)
             {
                 context.employees.Add(emp);
                 context.SaveChanges();
