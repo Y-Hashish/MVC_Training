@@ -7,6 +7,7 @@ namespace MVC_Training.Models
         public DbSet<Employee> employees { get; set; }
         public DbSet<Department> departments { get; set; }
         public ApplicationDbContext():base(){}
+        //public ApplicationDbContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-9856E0J;Initial Catalog=MVC_DB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");

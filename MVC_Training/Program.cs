@@ -1,3 +1,5 @@
+using MVC_Training.Repositories;
+
 namespace MVC_Training
 {
     public class Program
@@ -9,6 +11,8 @@ namespace MVC_Training
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
+            //builder.Services.AddScoped<IEmployee,EmployeeRepo>();
+           
 
             var app = builder.Build();
 

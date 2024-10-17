@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using MVC_Training.Models;
+using MVC_Training.Repositories;
 
 namespace MVC_Training.Controllers
 {
     public class EmployeeController : Controller
     {
+        EmployeeRepo emprepo;
+        public EmployeeController()
+        {
+            emprepo = new EmployeeRepo();
+        }
         public IActionResult checkName(string name)
         {
             if(name.Contains("slave"))
                 return Json(true);
             return Json(false);
         }
-            ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
-            List<Employee> employees = context.employees.ToList();
+            List<Employee> employees =emprepo.GetAll();
             //ViewBag.Employees = employees;
             return View("Index", employees);
         }
@@ -23,7 +28,7 @@ namespace MVC_Training.Controllers
 
         public IActionResult details (int id)
         {
-            var emp = context.employees.FirstOrDefault(p => p.id == id);
+            var emp = emprepo.GetById(id);
             return View(emp);
         }
         public IActionResult New()
@@ -35,8 +40,8 @@ namespace MVC_Training.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                context.employees.Add(emp);
-                context.SaveChanges();
+                emprepo.Add(emp);
+                emprepo.Save();
                 return RedirectToAction("Index");
             }
             return View("New",emp);
@@ -44,8 +49,8 @@ namespace MVC_Training.Controllers
         }
         public IActionResult edit (int id)
         {
-            Employee employee = context.employees.FirstOrDefault(predicate => predicate.id == id);
-            var dept = context.departments.ToList();
+            Employee employee = emprepo.GetById(id);//context.employees.FirstOrDefault(predicate => predicate.id == id);
+            var dept = emprepo.GetDept();
             ViewBag.department = dept;
             return View("edit",employee);
         }
@@ -53,13 +58,13 @@ namespace MVC_Training.Controllers
         {
             if (emp.name != null && emp.salary != null && emp.adress != null && emp.deptId != null && emp.ImageUrl != null)
             {
-                var EmpDb = context.employees.FirstOrDefault(p => p.id == id);
+                var EmpDb = emprepo.GetById(id);//context.employees.FirstOrDefault(p => p.id == id);
                 EmpDb.name = emp.name;
                 EmpDb.salary = emp.salary;
                 EmpDb.adress = emp.adress;
                 EmpDb.deptId = emp.deptId;
                 EmpDb.ImageUrl = emp.ImageUrl;
-                context.SaveChanges();
+                emprepo.Save();
                 return RedirectToAction("Index");
             }
             return View("edit",emp);
@@ -67,13 +72,15 @@ namespace MVC_Training.Controllers
 
         public IActionResult delete(int id)
         {
-            var emp = context.employees.FirstOrDefault(e =>e.id == id);
-            if (emp != null)
-            {
-                context.employees.Remove(emp);
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            
+            //if (emp != null)
+            //{
+            //    //context.employees.Remove(emp);
+
+            //    context.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            emprepo.Delete(id);
             return View("index");
             
         }
